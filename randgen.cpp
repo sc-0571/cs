@@ -2,7 +2,9 @@
 #include <iostream>
 using namespace std;
 int main() {
+  // reopen the stream of stdout with a new file 	
   freopen("C:\\study\\np\\output.txt", "w", stdout); 	
+  //seed of random	
   srand((unsigned) time(0));	
   int n = 5000 + rand()%5000;
   printf("%d\n", n);
