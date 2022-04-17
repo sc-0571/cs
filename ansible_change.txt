@@ -46,3 +46,24 @@ hostnames:
 
 
 
+    def _add_host_to_keyed_groups(self, keys, variables, host, strict=False, fetch_hostvars=True):
+        if not (keys and isinstance(keys, list)):
+            return
+
+        for keyed in keys:
+            # Store the initial list of groups
+            groups_before = set(self.inventory.groups)
+
+            # Call super only for this keyed item
+            super(InventoryModule, self)._add_host_to_keyed_groups(
+                [keyed], variables, host, strict, fetch_hostvars)
+
+            # Get the new list of groups
+            groups_after = set(self.inventory.groups)
+
+            # Set properties for the created groups only
+            for new_group in groups_after - groups_before:
+                if new_group.endswith('_'):
+                    new_group_trip =  new_group.rstrip('_')
+                    self.inventory.add_group(new_group_trip)
+
