@@ -1,0 +1,15 @@
+sudo yum install -y git golang systemd-devel
+
+git clone https://github.com/mheese/journalbeat.git
+
+sudo mkdir -p /go/src/github.com/mheese/journalbeat
+
+export GOPATH=/go
+
+sudo go get github.com/mheese/journalbeat
+
+sudo go mod vendor
+
+go build -ldflags '-s -w' -o /journalbeat
+
+
