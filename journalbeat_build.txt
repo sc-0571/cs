@@ -10,6 +10,6 @@ sudo go get github.com/mheese/journalbeat
 
 sudo go mod vendor
 
-go build -ldflags '-s -w' -o /journalbeat
+sudo go build -ldflags '-s -w' -o /journalbeat
 
 
