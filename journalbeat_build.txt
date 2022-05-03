@@ -7,9 +7,10 @@ sudo mkdir -p /go/src/github.com/mheese/journalbeat
 export GOPATH=/go
 
 sudo go get github.com/mheese/journalbeat
-
+sudo go mod init github.com/mheese/journalbeat
 sudo go mod vendor
 
 sudo go build -ldflags '-s -w' -o /journalbeat
 
-
+????
+go get -v -u github.com/golang/dep/cmd/dep   
