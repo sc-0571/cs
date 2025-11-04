@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-11-04T12:00:00.000Z" agent="GPT-5 Diagram Generator" version="21.3.0">
+  <diagram id="MWAA" name="Amazon MWAA Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" page="1" pageWidth="1200" pageHeight="800">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="customer_vpc" value="🟩 Customer VPC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="600" height="400" as="geometry"/>
+        </mxCell>
+        <mxCell id="service_vpc" value="🟩 Service VPC" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="80" width="400" height="400" as="geometry"/>
+        </mxCell>
+        <mxCell id="schedulers" value="📦 Airflow Schedulers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="workers" value="📦 Airflow Workers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="base_worker" value="📦 Base Worker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="320" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="add_worker" value="📦 Additional Worker(s)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" vertex="1" parent="1">
+          <mxGeometry x="320" y="320" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="db_proxy" value="🗄️ DB Proxy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="700" y="160" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="meta_db" value="💾 Meta Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cce5ff;" vertex="1" parent="1">
+          <mxGeometry x="880" y="160" width="140" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="web_server" value="💻 Airflow Web Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="1">
+          <mxGeometry x="780" y="300" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cloudwatch" value="☁ Amazon CloudWatch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
+          <mxGeometry x="100" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="s3" value="🪣 Amazon S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="1">
+          <mxGeometry x="300" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="sqs" value="📨 Amazon SQS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
+          <mxGeometry x="500" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="kms" value="🔑 AWS KMS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" vertex="1" parent="1">
+          <mxGeometry x="700" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" value="Database VPCE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" source="schedulers" target="db_proxy" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" value="Web Server VPCE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" source="workers" target="web_server" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="db_proxy" target="meta_db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" value="Private Network" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="web_server" target="meta_db" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" value="Public Network" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" source="web_server" target="kms" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" source="workers" target="s3" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" edge="1" source="schedulers" target="cloudwatch" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
