@@ -29,3 +29,8 @@ json
 
 架构模式：AgentCore Gateway 接收 MCP 协议请求，转换为对后端 AWS Lambda 函数的调用，再由 Lambda 函数去调用 Bedrock Knowledge Base 的 Retrieve API。
 
+
+
+RAG-MCP很可能作为GBrain中的一个关键中间层存在，其工作流如下图所示
+
+
